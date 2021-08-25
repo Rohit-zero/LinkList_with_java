@@ -1,0 +1,114 @@
+/*
+By Rohit
+Functions Discription
+    {
+        1) Insertion()                                inserts values in the end;
+        2) Insertion_in_Starting()                    inserts values in the startind;
+        3) Insertion_in_the_middle_of_two_Nodes()     insert between two nodes;
+        4) Delete()                                   delete the specific index Node;
+        5) Show()                                     prints all elements;
+    }         
+*/
+
+
+import java.util.*;
+public class LlinkList {
+    public class Node{
+        public int data;
+        public Node next;
+    }
+    Node head;
+    public void insertion(int data){
+        if(head==null)      //if head is null its means its our first node
+        {
+            Node node=new Node();
+            node.data=data;
+            node.next=null;
+            head=node;
+        }
+        else                //if some node already exist then itrate to the end node and give refrance to the new node
+        {
+            Node node=new Node();
+            Node temp=head;
+            while(temp.next !=null){
+                temp=temp.next;
+            }
+            node.data=data;
+            node.next=null;
+            temp.next=node;
+        }
+        
+        
+    }
+    public void insertion_in_starting(int data){
+        if(head==null)          
+        {
+            Node node=new Node();
+            node.data=data;
+            node.next=null;
+            head=node;
+        }
+        else{
+            Node node=new Node();
+            node.data=data;
+            node.next=head; //shift head to new node
+            head=node;
+        }
+    }
+    
+    public void insertion_in_the_middle_of_two_nodes(int index,int data){
+        if(index==0)
+        {
+            insertion(data);
+        }
+        else
+        {
+            Node temp=head;
+            for(int i=0;i<index-1;i++){
+                temp=temp.next;
+            }
+            Node node=new Node();
+            node.data=data;
+            node.next=temp.next;    //copy the refrance of next node in the new node    
+            temp.next=node;         //and refer new node in index-1 position node
+
+        }
+    }
+
+    public void delete(int del){
+        Node  temp=head;
+        for(int i=0;i<del-1;i++)
+        {
+            temp=temp.next;
+        }
+        temp.next=temp.next.next;
+    }
+
+
+    public void show()
+	{
+		Node temp = head;
+		
+		while(temp.next!=null)
+		{
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+		System.out.println(temp.data);
+	}
+    
+    
+    public static void main(String[] args) {
+        DeleteNode o=new DeleteNode();
+        o.insertion(1);
+        o.insertion(2);
+        o.insertion(3);
+        o.insertion(4);
+        //o.show();
+        o.delete(2);
+        o.insertion_in_starting(3);
+        o.insertion_in_the_middle_of_two_nodes(2, 5);
+
+        o.show();
+    }
+}
